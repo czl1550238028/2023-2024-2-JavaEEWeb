@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title>表单的提交处理</title>
+</head>
+<body>
+
+  <form  th:action="@{/submit}" th:object="${user}" method="post">
+    <table>
+      <tr>
+        <td>用户名：</td>
+        <td><input type="text" th:field="*{name}"></td>
+      </tr>
+      <tr>
+        <td>性别：</td>
+        <td>
+          <select th:field="*{sex}">
+            <option th:each="sex:${sexes}" th:value="${sex.value}" th:text="${sex.key}"></option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>喜欢的颜色：</td>
+        <td>
+          <span th:each="color:${colors}">
+            <input type="checkbox" th:field="*{mycolor}" th:value="${color}">
+            <label th:for="${#ids.prev('mycolor')}" th:text="${color}"></label>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <input type="submit" value="提交"/>
+        </td>
+      </tr>
+    </table>
+
+  </form>
+</body>
+</html>

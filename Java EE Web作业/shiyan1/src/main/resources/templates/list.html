@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Insert title here</title>
+  <link rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+  <!-- 默认访问 src/main/resources/static下的css文件夹-->
+  <link rel="stylesheet" th:href="@{css/bootstrap-theme.min.css}" />
+</head>
+<body>
+<!-- 面板 -->
+<div class="panel panel-primary">
+  <!-- 面板头信息 -->
+  <div class="panel-heading">
+    <!-- 面板标题 -->
+    <h3 class="panel-title">第一个基于Thymeleaf模板引擎的Spring Boot Web应用</h3>
+  </div>
+</div>
+<!-- 容器 -->
+<div class="container">
+  <div>
+    <h4>用户列表</h4>
+  </div>
+  <div class="row">
+
+    <!-- 循环取出集合数据 -->
+    <div class="col-md-4 col-sm-6" th:each="user:${users}">
+      <div class="caption">
+          用户名：<h4 th:text="${user.name}"></h4>
+          性别：<p th:switch="${user.sex}">
+          <span th:case="1">男</span>
+          <span th:case="2">女</span>
+        </p>
+          喜欢的颜色：<p th:each="color:${user.mycolor}">[[${color}]]</p>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

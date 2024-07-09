@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyx.bookmanager.mapper.RecordMapper">
+    <select id="getAllRecord" resultType="Record">
+        select * from lend_list
+    </select>
+
+    <select id="getOwnRecord" resultType="Record">
+        select * from lend_list where reader_id = #{readerId}
+    </select>
+
+    <insert id="insertRecord" parameterType="Record" >
+        insert into lend_list (sernum,book_id,reader_id,lend_date,back_date)
+        values (null,#{bookId},#{readerId},#{lendDate},null)
+    </insert>
+
+    <select id="getRecordBySernum" resultType="Record">
+        SELECT * FROM lend_list WHERE sernum = #{sernum}
+    </select>
+
+    <update id="updateRecord" parameterType="Record">
+        UPDATE lend_list
+        SET book_id=#{bookId},
+            reader_id=#{readerId},
+            lend_date=#{lendDate},
+            back_date = #{backDate}
+        WHERE sernum = #{sernum}
+    </update>
+</mapper>
